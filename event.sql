@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 01, 2023 at 06:53 AM
--- Server version: 5.7.36
--- PHP Version: 7.3.33
+-- Host: 127.0.0.1
+-- Generation Time: Apr 01, 2023 at 06:59 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `allevent`
 --
 
-DROP TABLE IF EXISTS `allevent`;
-CREATE TABLE IF NOT EXISTS `allevent` (
-  `event_id` int(11) NOT NULL AUTO_INCREMENT,
-  `eventName` varchar(200) NOT NULL,
-  PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE `allevent` (
+  `event_id` int(11) NOT NULL,
+  `eventName` varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -40,12 +38,10 @@ CREATE TABLE IF NOT EXISTS `allevent` (
 -- Table structure for table `allevents`
 --
 
-DROP TABLE IF EXISTS `allevents`;
-CREATE TABLE IF NOT EXISTS `allevents` (
-  `event_id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_name` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `allevents` (
+  `event_id` int(11) NOT NULL,
+  `event_name` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `allevents`
@@ -158,11 +154,10 @@ INSERT INTO `allevents` (`event_id`, `event_name`) VALUES
 -- Table structure for table `attendingevent`
 --
 
-DROP TABLE IF EXISTS `attendingevent`;
-CREATE TABLE IF NOT EXISTS `attendingevent` (
+CREATE TABLE `attendingevent` (
   `user_id` int(11) DEFAULT NULL,
   `event_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attendingevent`
@@ -183,11 +178,10 @@ INSERT INTO `attendingevent` (`user_id`, `event_id`) VALUES
 -- Table structure for table `eventreg`
 --
 
-DROP TABLE IF EXISTS `eventreg`;
-CREATE TABLE IF NOT EXISTS `eventreg` (
+CREATE TABLE `eventreg` (
   `user_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -195,11 +189,10 @@ CREATE TABLE IF NOT EXISTS `eventreg` (
 -- Table structure for table `follow`
 --
 
-DROP TABLE IF EXISTS `follow`;
-CREATE TABLE IF NOT EXISTS `follow` (
+CREATE TABLE `follow` (
   `user_id` int(11) NOT NULL,
   `follow_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -207,13 +200,11 @@ CREATE TABLE IF NOT EXISTS `follow` (
 -- Table structure for table `followreq`
 --
 
-DROP TABLE IF EXISTS `followreq`;
-CREATE TABLE IF NOT EXISTS `followreq` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `followreq` (
+  `id` int(11) NOT NULL,
   `fr_sender` int(50) DEFAULT NULL,
-  `fr_reciever` int(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `fr_reciever` int(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `followreq`
@@ -229,13 +220,11 @@ INSERT INTO `followreq` (`id`, `fr_sender`, `fr_reciever`) VALUES
 -- Table structure for table `friends`
 --
 
-DROP TABLE IF EXISTS `friends`;
-CREATE TABLE IF NOT EXISTS `friends` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `friends` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `friend_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+  `friend_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `friends`
@@ -249,7 +238,30 @@ INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES
 (5, 2, 1),
 (6, 3, 1),
 (7, 4, 1),
-(8, 5, 1);
+(8, 5, 1),
+(9, 21, 21),
+(10, 22, 1),
+(11, 22, 2),
+(12, 22, 3),
+(13, 22, 4),
+(14, 22, 5),
+(15, 22, 6),
+(16, 22, 7),
+(17, 22, 8),
+(18, 22, 9),
+(19, 22, 10),
+(20, 22, 11),
+(21, 22, 12),
+(22, 22, 13),
+(23, 22, 14),
+(24, 22, 15),
+(25, 22, 16),
+(26, 22, 17),
+(27, 22, 18),
+(28, 22, 19),
+(29, 22, 20),
+(30, 22, 21),
+(31, 22, 22);
 
 -- --------------------------------------------------------
 
@@ -257,29 +269,87 @@ INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) NOT NULL,
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(30) DEFAULT NULL,
   `password` varchar(30) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `email` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES
-(1, 'admin', 'admin', 'admin@xyz.in'),
-(2, 'admin1', 'admin1', 'admin1@xyz.in'),
-(3, 'admin2', 'admin2', 'admin2@xyz.in'),
-(4, 'admin3', 'admin3', 'admin3@xyz.in'),
-(5, 'admin4', 'admin4', 'admin4@xyz.in'),
-(6, 'admin5', 'admin5', 'admin5@xyz.in'),
-(7, 'admin6', 'admin6', 'admin6@xyz.in'),
-(8, 'admin7', 'admin7', 'admin7@xyz.in'),
-(9, 'bhavya', '1234', 'bhavyaharia100@gmail.com');
+(1, 'admin', 'admin', 'admin@xyz.in');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `allevent`
+--
+ALTER TABLE `allevent`
+  ADD PRIMARY KEY (`event_id`);
+
+--
+-- Indexes for table `allevents`
+--
+ALTER TABLE `allevents`
+  ADD PRIMARY KEY (`event_id`);
+
+--
+-- Indexes for table `followreq`
+--
+ALTER TABLE `followreq`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `friends`
+--
+ALTER TABLE `friends`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `allevent`
+--
+ALTER TABLE `allevent`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `allevents`
+--
+ALTER TABLE `allevents`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+
+--
+-- AUTO_INCREMENT for table `followreq`
+--
+ALTER TABLE `followreq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `friends`
+--
+ALTER TABLE `friends`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

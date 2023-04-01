@@ -11,11 +11,10 @@
 
 <body>
    <div class="wrapper">
-     
+
       <div class="form-container">
-     
          <div class="form-inner">
-            <form method="POST" action="{{ url_for('login') }}" class="login">
+            <form method="POST" action="{{ url_for('register') }}" class="signup">
                {{ form.csrf_token }}
                <div class="field">
                   {{ form.email.label }} {{ form.email(size=30, class='form-control', placeholder='Email Address',
@@ -25,15 +24,16 @@
                   {{ form.password.label }} {{ form.password(size=30, class='form-control', placeholder='Password',
                   required=True) }}
                </div>
-               <div class="pass-link">
-                  <a href="#">Forgot password?</a>
+               <div class="field">
+                  {{ form.password.label }} {{ form.password(size=30, class='form-control', placeholder='Password',
+                  required=True) }}
                </div>
                <div class="field btn">
                   <div class="btn-layer"></div>
-                  {{ form.submit(class='btn btn-primary', value='Login') }}
+                  {{ form.submit(class='btn btn-primary', value='Signup') }}
                </div>
                <div class="signup-link">
-                  Not a member? <a href="{{ url_for('register') }}">Signup now</a>
+                  Already a member? <a href="{{ url_for('login') }}">Login now</a>
                </div>
             </form>
          </div>
